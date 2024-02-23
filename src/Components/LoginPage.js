@@ -2,21 +2,49 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/loginStyles.css';
 import { Spinner } from 'react-bootstrap';
+import formValidationSignIn from './formValidation-signIn';
 
 const LoginPage = ({ setIsLoggedIn }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const initialFormData = {
+    email: '',
+    password: '',
+    submitted: false
+  };
+  const [formData, setFormData] = useState(initialFormData);
+  //for errors
+  const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const handleInputChange = e => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+    }));
+
+    if (formData.submitted) {
+      const validationErrors = formValidationSignIn({ ...formData, [name]: value });
+      setErrors(validationErrors);
+    }
+  };
+
+
+
   const onButtonClick = async e => {
     e.preventDefault();
+    formData.submitted = true;
+    const validationErrors = formValidationSignIn(formData);
+    if(Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     setIsLoading(true);
 
     try {
       const response = await fetch(
-        `http://localhost:8000/signIn?email=${email}&password=${password}`
+        `http://localhost:8000/signIn?email=${formData.email}&password=${formData.password}`
       );
 
       if (response.ok) {
@@ -24,11 +52,13 @@ const LoginPage = ({ setIsLoggedIn }) => {
         setIsLoggedIn(true);
         navigate('/dashboard', { state: { firstName: data.user.firstName } });
       } else {
-        setError('Invalid userid or password');
+        errors.serverError = 'Invalid userid or password';
+        setErrors(errors);
       }
     } catch (error) {
       console.error('Error:', error);
-      setError('An error occurred, please try again later');
+      errors.serverError = 'An error occurred, please try again later';
+      setErrors(errors);
     } finally {
       setIsLoading(false);
     }
@@ -48,15 +78,21 @@ const LoginPage = ({ setIsLoggedIn }) => {
         <hr />
         <label htmlFor="inputEmail">Email Id</label>&nbsp;&nbsp;&nbsp;&nbsp;
         <input
-          type="email"
-          value={email}
-          id="inputEmail"
-          className="form-control"
-          placeholder="Email"
-          onChange={ev => setEmail(ev.target.value)}
-          required
-          autoFocus
+           type="email"
+           className="form-control customInput"
+           id="email"
+           name="email"
+           placeholder="Enter Email"
+           value={formData.email}
+           onChange={handleInputChange}
+           required
+           style={{
+             border: errors && errors.email ? '2px solid red' : 'none'
+           }}
         />
+        {errors.email && (
+                  <small className="text-danger">{errors.email}</small>
+                )}
         <br />
         <label htmlFor="inputPassword" className="sr-only">
           Password
@@ -64,13 +100,19 @@ const LoginPage = ({ setIsLoggedIn }) => {
         &nbsp; &nbsp;
         <input
           type="password"
-          value={password}
-          id="inputPassword"
-          className="form-control"
-          placeholder="Password"
-          onChange={ev => setPassword(ev.target.value)}
-          required
+          className="form-control customInput"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          placeholder="Enter Password"
+          style={{
+            border: errors && errors.password ? '2px solid red' : 'none'
+          }}
         />
+         {errors.password && (
+                  <small className="text-danger">{errors.password}</small>
+                )}
         <div className="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me" /> Remember me
@@ -82,7 +124,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
           onClick={onButtonClick}
           value={'Log In'}
         />
-        {error && <div className="alert alert-danger">{error}</div>}
+        {errors.serverError && <div className="alert alert-danger">{errors.serverError}</div>}
       </form>
     </>
   );
