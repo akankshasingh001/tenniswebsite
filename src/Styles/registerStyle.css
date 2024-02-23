@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Full-width input fields */
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'] {
+  width: 20vw;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
+input[type='number']:focus {
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(4, 170, 109, 0.5);
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: rgb(144, 223, 27);
+  color: #133942;
+  padding: 8px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity: 1;
+  background-color: #e7d801;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  input[type='text'],
+  input[type='password'],
+  input[type='email'],
+  input[type='number'] {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}

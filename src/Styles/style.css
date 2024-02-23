@@ -1,0 +1,136 @@
+/* Header Styles */
+.header {
+  position: fixed;
+  top: 0;
+  padding: 10px 0;
+  width: 100%;
+  /* z-index: -5; */
+}
+/*Style for text tennis Craze*/
+
+.headerName {
+  font-family: fantasy;
+  font-size: 80px;
+  display: flex;
+  padding-right: 35%;
+}
+/*for image icon*/
+.circle {
+  border-radius: 75px;
+}
+
+/* for header background */
+
+.container-fluid {
+  background-color: rgb(144, 223, 27);
+}
+
+/* for navigaion style which is in header */
+.navigation {
+  position: fixed;
+  top: 13.5%;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+}
+/* Navigation Styling*/
+
+ul {
+  list-style-type: none;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #133942;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #e7d801;
+  color: #133942;
+}
+
+/*container Middle part of header and footer*/
+.container {
+  max-width: 1200px;
+  margin-top: 80px;
+  padding: 20px;
+}
+
+/*styling for text in card paragraph of Home*/
+.card-text {
+  color: #133942;
+}
+
+/* for footer */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(144, 223, 27);
+  color: #133942;
+  text-align: center;
+  padding: 10px 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .headerName {
+    font-size: 40px; /* font size for smaller screens */
+    padding-right: 0; /* Remove padding on smaller screens */
+  }
+
+  .circle {
+    width: 100px; /* logo size for smaller screens */
+    height: 100px;
+  }
+
+  .navbar-brand {
+    margin-right: 0;
+  }
+  .container {
+    margin-top: 15%;
+    padding: 10px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Adjust opacity for desired blur effect */
+  backdrop-filter: blur(1px); /* Adjust blur amount as needed */
+  z-index: 10; /* Ensure the overlay is on top of other content */
+}
+
+.spinner {
+  position: fixed;
+  color: rgb(144, 223, 27);
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  z-index: 20; /* Ensure the spinner is on top of the overlay */
+}
+.customInput {
+  margin: 2px !important;
+  height: 50px;
+}
+.button-class {
+  margin-top: 4px;
+}
