@@ -47,7 +47,10 @@ const SignUp = ({ setIsLoggedIn }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    formData.submitted = true;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      submitted: true
+    }));
     const validationErrors = formValidation(formData);
     setErrors(validationErrors);
 

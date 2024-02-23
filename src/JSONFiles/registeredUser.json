@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "firstName": "jj",
+    "lastName": "kumar",
+    "email": "jj@gmail.com",
+    "gender": "Male",
+    "zipCode": "12345",
+    "password": "123",
+    "confirmPassword": "123",
+    "submitted": true
+  }
+]

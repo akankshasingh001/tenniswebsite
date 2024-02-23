@@ -8,7 +8,7 @@ const formValidation = data => {
     errors.lastName = 'Please enter last name';
   }
   // Email validation
-  if (data.email || !data.email.trim()) {
+  if (!data.email || !data.email.trim()) {
     errors.email = 'Please enter email';
   } else if (!/\S+@\S+\.\S+/.test(data.email)) {
     errors.email = 'Please enter a valid Email';
@@ -24,7 +24,7 @@ const formValidation = data => {
     errors.zipCode = 'Zip Code should be a number with a maximum length of 5';
   }
 
-  if (data.password || !data.password.trim()) {
+  if (!data.password || !data.password.trim()) {
     errors.password = 'Please enter password';
   }
   if (!data.confirmPassword.trim()) {

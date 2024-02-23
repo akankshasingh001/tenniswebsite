@@ -24,16 +24,8 @@ const LoginPage = ({ setIsLoggedIn }) => {
       [name]: value
     }));
 
-    setErrors(prevErrors => ({
-      ...prevErrors,
-      [name]: ''
-    }));
-
-    alert(JSON.stringify(formData));
-
     if (formData.submitted) {
       const validationErrors = formValidationSignIn({ ...formData, [name]: value });
-      alert(JSON.stringify(validationErrors));
       setErrors(validationErrors);
     }
   };
@@ -98,6 +90,9 @@ const LoginPage = ({ setIsLoggedIn }) => {
              border: errors && errors.email ? '2px solid red' : 'none'
            }}
         />
+        {errors.email && (
+                  <small className="text-danger">{errors.email}</small>
+                )}
         <br />
         <label htmlFor="inputPassword" className="sr-only">
           Password
@@ -115,6 +110,9 @@ const LoginPage = ({ setIsLoggedIn }) => {
             border: errors && errors.password ? '2px solid red' : 'none'
           }}
         />
+         {errors.password && (
+                  <small className="text-danger">{errors.password}</small>
+                )}
         <div className="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me" /> Remember me
