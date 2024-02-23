@@ -52,20 +52,17 @@ Copy code
 
 # Clone the repository
 
-git clone https://github.com/username/project-name.git
+git clone https://github.com/akankshasingh001/tenniswebsite.git
 
 # Navigate into the project directory
 
-cd project-name
+cd tenniswebsite
 
 # Install dependencies
 
-npm install
-Usage
-Explain how to use the project. Include any commands, configuration, or examples needed to get started.
+Run below command
 
-bash
-Copy code
+npm install
 
 # Run the development server
 
